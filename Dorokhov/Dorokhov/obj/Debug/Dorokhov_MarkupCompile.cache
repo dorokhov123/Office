@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Student20\Desktop\Dorokhov\Dorokhov\obj\Debug\
+C:\Users\student20\Desktop\Office\Dorokhov\Dorokhov\obj\Debug\
 Dorokhov
 none
 false
 DEBUG;TRACE
-C:\Users\Student20\Desktop\Dorokhov\Dorokhov\App.xaml
+C:\Users\student20\Desktop\Office\Dorokhov\Dorokhov\App.xaml
 41206624892
 2-602890034
-202089593451
-18628573694
+242120035908
+181748032887
 MainWindow.xaml;Pages\PageAuth.xaml;Pages\PageEmployers.xaml;Pages\PageMenu.xaml;
 
-False
+True
 
