@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DorokhovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accounting">
+    <Key>
+      <PropertyRef Name="IdAccounting" />
+    </Key>
+    <Property Name="IdAccounting" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="CodeEquipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfRegistration" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Count" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Accounting_Employee" FromRole="Accounting" ToRole="Employee" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK_Accounting_Equipment" FromRole="Accounting" ToRole="Equipment" />
+    <NavigationProperty Name="Room" Relationship="Self.FK_Accounting_Room" FromRole="Accounting" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoomOfEmployee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accountings" Relationship="Self.FK_Accounting_Employee" FromRole="Employee" ToRole="Accounting" />
+    <NavigationProperty Name="Room" Relationship="Self.FK_Employee_Room" FromRole="Employee" ToRole="Room" />
+    <NavigationProperty Name="Repairs" Relationship="Self.FK_Repair_Employee" FromRole="Employee" ToRole="Repair" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="CodeEquipment" />
+    </Key>
+    <Property Name="CodeEquipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Brend" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="WriteOffDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Accountings" Relationship="Self.FK_Accounting_Equipment" FromRole="Equipment" ToRole="Accounting" />
+    <NavigationProperty Name="Repairs" Relationship="Self.FK_Repair_Equipment" FromRole="Equipment" ToRole="Repair" />
+  </EntityType>
+  <EntityType Name="Repair">
+    <Key>
+      <PropertyRef Name="IdRepair" />
+    </Key>
+    <Property Name="IdRepair" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="CodeEquipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Repair_Employee" FromRole="Repair" ToRole="Employee" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK_Repair_Equipment" FromRole="Repair" ToRole="Equipment" />
+    <NavigationProperty Name="Room" Relationship="Self.FK_Repair_Room" FromRole="Repair" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="NumberOfRoom" />
+    </Key>
+    <Property Name="NumberOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accountings" Relationship="Self.FK_Accounting_Room" FromRole="Room" ToRole="Accounting" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Room" FromRole="Room" ToRole="Employee" />
+    <NavigationProperty Name="Repairs" Relationship="Self.FK_Repair_Room" FromRole="Room" ToRole="Repair" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Accounting_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Accounting_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="CodeEquipment" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="CodeEquipment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Accounting_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Accounting" Type="Self.Accounting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="NumberOfRoom" />
+      </Principal>
+      <Dependent Role="Accounting">
+        <PropertyRef Name="NumberOfRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="NumberOfRoom" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoomOfEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Repair_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Repair">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Repair_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="CodeEquipment" />
+      </Principal>
+      <Dependent Role="Repair">
+        <PropertyRef Name="CodeEquipment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Repair_Room">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="NumberOfRoom" />
+      </Principal>
+      <Dependent Role="Repair">
+        <PropertyRef Name="NumberOfRoom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DorokhovEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accountings" EntityType="Self.Accounting" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+    <EntitySet Name="Repairs" EntityType="Self.Repair" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Accounting_Employee" Association="Self.FK_Accounting_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Accounting" EntitySet="Accountings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Accounting_Equipment" Association="Self.FK_Accounting_Equipment">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="Accounting" EntitySet="Accountings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Accounting_Room" Association="Self.FK_Accounting_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Accounting" EntitySet="Accountings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Room" Association="Self.FK_Employee_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Repair_Employee" Association="Self.FK_Repair_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Repair" EntitySet="Repairs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Repair_Equipment" Association="Self.FK_Repair_Equipment">
+      <End Role="Equipment" EntitySet="Equipments" />
+      <End Role="Repair" EntitySet="Repairs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Repair_Room" Association="Self.FK_Repair_Room">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Repair" EntitySet="Repairs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

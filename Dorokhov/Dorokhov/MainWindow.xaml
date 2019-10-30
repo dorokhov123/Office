@@ -1,0 +1,32 @@
+﻿<Window x:Class="Dorokhov.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="clr-namespace:Dorokhov.Properties"
+        xmlns:local="clr-namespace:Dorokhov"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" MinHeight="600" MinWidth="800" Icon="Assets/Icon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Image Height="100" Width="100" HorizontalAlignment="Left" Margin="5" Source="Assets/OfficeLogo.png" ></Image>
+        <StackPanel>
+            <TextBlock Text="Office" Style="{StaticResource CommonBlock}" FontSize="24"></TextBlock>
+        </StackPanel>
+        <Button Width="100" HorizontalAlignment="Right" Margin="5" Name="BtnBack" Content="{x:Static prop:Resources.ActionBack}" Click="BtnBack_Click"></Button>
+        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered"></Frame>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="1" Margin="174.658,6,216,6">
+            <TextBlock  Style="{StaticResource CommonBlock}" Width="auto"
+                        Text="{x:Static prop:Resources.TextChooseLanguage}"></TextBlock>
+            <ComboBox SelectionChanged="ComboLanguage_SelectionChanged" SelectedIndex="0" Name="ComboLanguage">
+                <ComboBoxItem>Русский</ComboBoxItem>
+                <ComboBoxItem>English</ComboBoxItem>
+
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>
