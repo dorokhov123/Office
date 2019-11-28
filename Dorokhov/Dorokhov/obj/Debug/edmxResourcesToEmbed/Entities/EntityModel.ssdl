@@ -4,42 +4,62 @@
     <Key>
       <PropertyRef Name="IdAccounting" />
     </Key>
-    <Property Name="IdAccounting" Type="int" Nullable="false" />
+    <Property Name="IdAccounting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdEmployee" Type="int" Nullable="false" />
     <Property Name="CodeEquipment" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="NumberOfRoom" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DateOfRegistration" Type="date" Nullable="false" />
-    <Property Name="Count" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="IdBrand" />
+    </Key>
+    <Property Name="IdBrand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameBrand" Type="nchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="IdEmployee" />
     </Key>
-    <Property Name="IdEmployee" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="RoomOfEmployee" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNumber" Type="nvarchar" MaxLength="17" Nullable="false" />
+    <Property Name="IdPost" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Equipment">
     <Key>
       <PropertyRef Name="CodeEquipment" />
     </Key>
     <Property Name="CodeEquipment" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Brend" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdModel" Type="int" Nullable="false" />
     <Property Name="DeliveryDate" Type="date" Nullable="false" />
     <Property Name="WriteOffDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="IdModel" />
+    </Key>
+    <Property Name="IdModel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBrand" Type="int" Nullable="false" />
+    <Property Name="NameModel" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="IdPost" />
+    </Key>
+    <Property Name="IdPost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameOfPost" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Repair">
     <Key>
       <PropertyRef Name="IdRepair" />
     </Key>
-    <Property Name="IdRepair" Type="int" Nullable="false" />
+    <Property Name="IdRepair" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdEmployee" Type="int" Nullable="false" />
     <Property Name="CodeEquipment" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="NumberOfRoom" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Reason" Type="text" Nullable="false" />
     <Property Name="Cost" Type="money" Nullable="false" />
   </EntityType>
@@ -48,7 +68,6 @@
       <PropertyRef Name="NumberOfRoom" />
     </Key>
     <Property Name="NumberOfRoom" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="NameOfRoom" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -103,6 +122,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Employee_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="IdPost" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdPost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Employee_Room">
     <End Role="Room" Type="Self.Room" Multiplicity="1" />
     <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -112,6 +143,30 @@
       </Principal>
       <Dependent Role="Employee">
         <PropertyRef Name="RoomOfEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipment_Model">
+    <End Role="Model" Type="Self.Model" Multiplicity="1" />
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="IdModel" />
+      </Principal>
+      <Dependent Role="Equipment">
+        <PropertyRef Name="IdModel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Model_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Model" Type="Self.Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="IdBrand" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="IdBrand" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -139,22 +194,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Repair_Room">
-    <End Role="Room" Type="Self.Room" Multiplicity="1" />
-    <End Role="Repair" Type="Self.Repair" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Room">
-        <PropertyRef Name="NumberOfRoom" />
-      </Principal>
-      <Dependent Role="Repair">
-        <PropertyRef Name="NumberOfRoom" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DorokhovModelStoreContainer">
     <EntitySet Name="Accounting" EntityType="Self.Accounting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Repair" EntityType="Self.Repair" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -171,9 +217,21 @@
       <End Role="Room" EntitySet="Room" />
       <End Role="Accounting" EntitySet="Accounting" />
     </AssociationSet>
+    <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
     <AssociationSet Name="FK_Employee_Room" Association="Self.FK_Employee_Room">
       <End Role="Room" EntitySet="Room" />
       <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipment_Model" Association="Self.FK_Equipment_Model">
+      <End Role="Model" EntitySet="Model" />
+      <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Model_Brand" Association="Self.FK_Model_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Model" EntitySet="Model" />
     </AssociationSet>
     <AssociationSet Name="FK_Repair_Employee" Association="Self.FK_Repair_Employee">
       <End Role="Employee" EntitySet="Employee" />
@@ -181,10 +239,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Repair_Equipment" Association="Self.FK_Repair_Equipment">
       <End Role="Equipment" EntitySet="Equipment" />
-      <End Role="Repair" EntitySet="Repair" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Repair_Room" Association="Self.FK_Repair_Room">
-      <End Role="Room" EntitySet="Room" />
       <End Role="Repair" EntitySet="Repair" />
     </AssociationSet>
   </EntityContainer>

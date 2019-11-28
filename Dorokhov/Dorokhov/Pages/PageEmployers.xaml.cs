@@ -20,7 +20,6 @@ namespace Dorokhov.Pages
     /// </summary>
     public partial class PageEmployers : Page
     {
-        List<Entities.Room> _rooms = AppData.Context.Rooms.ToList();
         public PageEmployers()
         {
             InitializeComponent();
@@ -28,13 +27,13 @@ namespace Dorokhov.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            List<Entities.Room> rooms = AppData.Context.Rooms.ToList();
             var room = new Entities.Room
             {
-                NumberOfRoom = "-1",
-                NameOfRoom = "All"
+                NumberOfRoom = "All"
             };
-            _rooms.Insert(0, room);
-            CBFilter.ItemsSource = _rooms;
+            rooms.Insert(0, room);
+            CBFilter.ItemsSource = rooms;
             CBFilter.SelectedIndex = 0;
             Update();
         }
@@ -60,6 +59,27 @@ namespace Dorokhov.Pages
             if (CBFilter.SelectedIndex != 0)
                list = list.Where(p => p.Room == CBFilter.SelectedItem as Entities.Room).ToList();
             DGEmployers.ItemsSource = list;
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Windows.WindowAddEditEmploee(DGEmployers.SelectedItem as Entities.Employee);
+            window.ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите удалить?", "Удалить?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                AppData.Context.Employees.Remove(DGEmployers.SelectedItem as Entities.Employee);
+                AppData.Context.SaveChanges();
+            }
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Windows.WindowAddEditEmploee();
+            window.ShowDialog();
         }
     }
 }

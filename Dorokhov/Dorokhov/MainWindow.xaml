@@ -14,7 +14,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Image Height="100" Width="100" HorizontalAlignment="Left" Margin="5" Source="Assets/OfficeLogo.png" ></Image>
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Office" Style="{StaticResource CommonBlock}" FontSize="24"></TextBlock>
         </StackPanel>
         <Button Width="100" HorizontalAlignment="Right" Margin="5" Name="BtnBack" Content="{x:Static prop:Resources.ActionBack}" Click="BtnBack_Click"></Button>

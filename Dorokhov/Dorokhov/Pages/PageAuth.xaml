@@ -10,7 +10,7 @@
       Title="PageAuth" Loaded="Page_Loaded">
 
     <Grid>
-        <StackPanel >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Style="{StaticResource CommonBlock}" Text="{x:Static prop:Resources.TextLogin}"></TextBlock>
                 <TextBox x:Name="TBoxLogin"></TextBox>

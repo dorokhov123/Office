@@ -29,5 +29,10 @@ namespace Dorokhov.Pages
         {
             AppData.MainFrame.Navigate(new PageEmployers());
         }
+
+        private void BtnRepair_Click(object sender, RoutedEventArgs e)
+        {
+            AppData.MainFrame.Navigate(new PageRepair());
+        }
     }
 }

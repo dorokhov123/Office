@@ -27,9 +27,11 @@ namespace Dorokhov.Entities
         public string Patronymic { get; set; }
         public string RoomOfEmployee { get; set; }
         public string PhoneNumber { get; set; }
+        public int IdPost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Accounting> Accountings { get; set; }
+        public virtual Post Post { get; set; }
         public virtual Room Room { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Repair> Repairs { get; set; }

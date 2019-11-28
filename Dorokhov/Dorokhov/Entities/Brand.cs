@@ -12,15 +12,18 @@ namespace Dorokhov.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Repair
+    public partial class Brand
     {
-        public int IdRepair { get; set; }
-        public int IdEmployee { get; set; }
-        public string CodeEquipment { get; set; }
-        public string Reason { get; set; }
-        public decimal Cost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Brand()
+        {
+            this.Models = new HashSet<Model>();
+        }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Equipment Equipment { get; set; }
+        public int IdBrand { get; set; }
+        public string NameBrand { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Model> Models { get; set; }
     }
 }

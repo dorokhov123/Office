@@ -19,17 +19,13 @@ namespace Dorokhov.Entities
         {
             this.Accountings = new HashSet<Accounting>();
             this.Employees = new HashSet<Employee>();
-            this.Repairs = new HashSet<Repair>();
         }
     
         public string NumberOfRoom { get; set; }
-        public string NameOfRoom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Accounting> Accountings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Repair> Repairs { get; set; }
     }
 }

@@ -12,24 +12,18 @@ namespace Dorokhov.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipment()
+        public Post()
         {
-            this.Accountings = new HashSet<Accounting>();
-            this.Repairs = new HashSet<Repair>();
+            this.Employees = new HashSet<Employee>();
         }
     
-        public string CodeEquipment { get; set; }
-        public int IdModel { get; set; }
-        public System.DateTime DeliveryDate { get; set; }
-        public Nullable<System.DateTime> WriteOffDate { get; set; }
+        public int IdPost { get; set; }
+        public string NameOfPost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accounting> Accountings { get; set; }
-        public virtual Model Model { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Repair> Repairs { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

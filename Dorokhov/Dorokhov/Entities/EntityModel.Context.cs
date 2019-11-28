@@ -26,8 +26,11 @@ namespace Dorokhov.Entities
         }
     
         public virtual DbSet<Accounting> Accountings { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Equipment> Equipments { get; set; }
+        public virtual DbSet<Model> Models { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Repair> Repairs { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }

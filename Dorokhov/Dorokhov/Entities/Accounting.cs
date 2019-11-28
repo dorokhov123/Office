@@ -19,7 +19,6 @@ namespace Dorokhov.Entities
         public string CodeEquipment { get; set; }
         public string NumberOfRoom { get; set; }
         public System.DateTime DateOfRegistration { get; set; }
-        public int Count { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Equipment Equipment { get; set; }

@@ -1,0 +1,41 @@
+﻿<Window x:Class="Dorokhov.Windows.WindowAddEditEmploee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dorokhov.Windows"
+        xmlns:form="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="WindowAddEditEmploee" Height="450" Width="450" MinHeight="450" MaxHeight="450" MinWidth="450" MaxWidth="450" Icon="/Dorokhov;component/Assets/Icon.ico">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Фамилия :"></TextBlock>
+                <TextBox x:Name="TBoxSurname"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Имя :"></TextBlock>
+                <TextBox x:Name="TBoxName"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Отчество :"></TextBlock>
+                <TextBox x:Name="TBoxPatronymic"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Кабинет :"></TextBlock>
+                <ComboBox IsEditable="True" DisplayMemberPath="NumberOfRoom" x:Name="CBoxRoom" SelectionChanged="CBoxRoom_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Телефон :"></TextBlock>
+                <WindowsFormsHost Margin="5" Height="27" Width="120">
+                    <form:MaskedTextBox x:Name="MTBoxPhone" Mask="+7 000 000 00 00" SelectionStart="2"></form:MaskedTextBox>
+                </WindowsFormsHost>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource CommonBlock}" Text="Должность :"></TextBlock>
+                <ComboBox IsEditable="True" DisplayMemberPath="NameOfPost" x:Name="CBoxPost" SelectionChanged="CBoxPost_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <Button x:Name="BtnOk" Click="BtnOk_Click" HorizontalAlignment="Center"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

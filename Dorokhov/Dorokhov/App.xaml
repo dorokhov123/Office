@@ -19,8 +19,9 @@
 
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="Width" Value="175"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="27"></Setter>
+            <Setter Property="MaxLength" Value="50"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
             <Setter Property="HorizontalAlignment" Value="Left"></Setter>
@@ -29,7 +30,7 @@
 
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="Width" Value="175"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="27"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
@@ -58,7 +59,7 @@
 
         <Style TargetType="PasswordBox">
             <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="Width" Value="175"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="27"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
@@ -95,7 +96,7 @@
 
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="Width" Value="175"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
             <Setter Property="Height" Value="27"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
@@ -111,10 +112,6 @@
             <Setter Property="Foreground" Value="{DynamicResource ColorFont}"></Setter>
             <Setter Property="TextAlignment" Value="Right"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
-        </Style>
-        <Style TargetType="StackPanel">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -10,10 +10,10 @@
       Title="PageMenu">
 
     <Grid>
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="BtnEmployee" Content="{x:Static prop:Resources.TextEmployee}" Click="BtnEmployee_Click"></Button>
             <Button x:Name="BtnEquipment"  Content="{x:Static prop:Resources.TextEquipment}"></Button>
-            <Button x:Name="BtnRepair"  Content="{x:Static prop:Resources.TextRepair}"></Button>
+            <Button x:Name="BtnRepair"  Content="{x:Static prop:Resources.TextRepair}" Click="BtnRepair_Click"></Button>
             
         </StackPanel>
     </Grid>
